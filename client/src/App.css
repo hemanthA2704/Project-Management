@@ -1,6 +1,13 @@
+
 a{
   color: black !important;
 }
+
+select {
+  cursor: pointer;
+}
+
+
 
 .auth-card{
   padding: 20px;
@@ -51,3 +58,8 @@ img{
   font-size: 50px;
   color: white;
 }
+
+.brand-logo {
+  margin-left: 10px;
+}
+

@@ -1,10 +1,10 @@
-import { useState, useContext, useEffect } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { useState, useContext } from "react";
+import {Link , useNavigate} from "react-router-dom";
 import M from "materialize-css";
 import {userContext} from '../../App'
  
 const Signin = () => {
-    const { loginedUser, userDispatch, role, roleDispatch } = useContext(userContext);
+    const {userDispatch, roleDispatch } = useContext(userContext);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [myRole,setmyRole] = useState('');
@@ -20,6 +20,12 @@ const Signin = () => {
         return regexp.test(String(email).toLowerCase());
     }
     
+    const handleEnterClick = (e) => {
+        if (e.code === 'Enter') {
+            postData() ;
+        }
+    }
+
     const postData = () => {        
 
         if(!myRole){
@@ -29,11 +35,10 @@ const Signin = () => {
 
         if(!isEmail(email)){
             M.toast({html: 'Invalid Email', displayLength: '800', classes: '#e53935 red darken-1'});
-            clearAttributes();
             return;
         }
 
-        fetch(`/${myRole}signin`,{
+        fetch(`http://localhost:8000/${myRole}signin`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +51,6 @@ const Signin = () => {
         .then(data => {
             if(data.error){
                 M.toast({html: data.error, displayLength: '800', classes: '#e53935 red darken-1'});
-                clearAttributes();
             }else{
                 localStorage.setItem('jwt',data.token);
                 localStorage.setItem('user',JSON.stringify(data.user));
@@ -62,17 +66,17 @@ const Signin = () => {
 
     return (
             <div className="card auth-card" style={{margin: "50px auto"}}>
-                <h4 style={{padding: "15px"}}>Project_Management</h4>
+                <h4 style={{padding: "15px"}}>ClassProjex</h4>
                 <select className="browser-default" onChange={(e)=>setmyRole(e.target.value)}>
                     <option value="" >Choose your Role</option>
                     <option value="teacher">Teacher</option>
                     <option value="student">Student</option>
                 </select>  
                 <input type="email" placeholder="Email" value={email} onChange={(e)=>setEmail((e.target.value).toLowerCase())}/>
-                <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} onKeyUp={handleEnterClick}/>
                 <button className="btn waves-effect waves-light" onClick={() => postData()}>Login</button>
                 <h5>
-                    <Link to="/signup">Don't have an account?</Link>
+                        Don't have an account? <Link className="createNewAccount" to="/signup">Create One</Link>
                 </h5>
             </div>
     );

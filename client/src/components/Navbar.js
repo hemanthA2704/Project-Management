@@ -30,7 +30,7 @@ const Navbar = () => {
     return(
         <nav>
             <div className="nav-wrapper white">
-            <a href="/" className="brand-logo left">Pro-Man</a>
+            <a href="/" className="brand-logo left">ClassProjex</a>
             <ul id="nav-mobile" className="right">
                 {renderlist()}                
             </ul>

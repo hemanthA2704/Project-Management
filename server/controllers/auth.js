@@ -25,7 +25,6 @@ const teachersignup = async (req,res) => {
         });
     }else{
         return res.json({error: "Email already Exists"});
-        
     }
     
 }

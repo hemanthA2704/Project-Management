@@ -17,7 +17,7 @@ const CreateProject = () => {
     
     const postData = () => {  
         console.log(due);
-        fetch('/createproject',{
+        fetch('http://localhost:8000/createproject',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

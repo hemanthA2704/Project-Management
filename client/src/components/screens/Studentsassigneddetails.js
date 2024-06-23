@@ -8,7 +8,7 @@ const StudentsInfo = () => {
     const navigate = useNavigate();
 
     const {id} = useParams();
-    const url = `/teacher/projectdetails/${id}`;
+    const url = `http://localhost:8000/teacher/projectdetails/${id}`;
 
     const [studentEmail, setEmail] = useState('');    
     const [project, setProject] = useState('');
@@ -19,7 +19,7 @@ const StudentsInfo = () => {
     }
 
     const deleteStudent = (studentID) => {
-        fetch(`/deletestudent/${id}`, {
+        fetch(`http://localhost:8000/deletestudent/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': 'Bearer '+localStorage.getItem('jwt'),
@@ -63,7 +63,7 @@ const StudentsInfo = () => {
             return;
         }
 
-        fetch(`/addstudent/${id}`,{
+        fetch(`http://localhost:8000/addstudent/${id}`,{
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer '+localStorage.getItem('jwt'),

@@ -14,7 +14,7 @@ const Submissions = (props) => {
     let studentsInfo;
     let status;
     props.project&&props.project.students.forEach((student) => { 
-        if(student.studentID._id.toString()==props.student.toString()){
+        if(student.studentID._id.toString() === props.student.toString()){
             answerFile = student.solutionfile;
             studentsInfo = student; 
             status = student.status;         
@@ -22,7 +22,7 @@ const Submissions = (props) => {
     })
 
     const addPoints = () => {
-        fetch(`/addPoints/${props.project._id}`, {
+        fetch(`http://localhost:8000/addPoints/${props.project._id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer '+localStorage.getItem('jwt'),

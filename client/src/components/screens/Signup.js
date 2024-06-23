@@ -9,11 +9,11 @@ const Signup = () => {
     const [myRole,setmyRole] = useState('');
     const navigate = useNavigate();
 
-    const clearAttributes = () => {
-        setmyRole('');
-        setName('');
-        setEmail('');
-        setPassword('');
+
+    const handleKeyEnter = (e) => {
+        if (e.code === 'Enter') {
+            postData() ;
+        }
     }
 
     const isEmail = (email) => {
@@ -30,11 +30,10 @@ const Signup = () => {
 
         if(!isEmail(email)){
             M.toast({html: 'Invalid Email', displayLength: '800', classes: '#e53935 red darken-1'});
-            clearAttributes();
             return;
         }
 
-        fetch(`/${myRole}signup`,{
+        fetch(`http://localhost:8000/${myRole}signup`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,7 +47,6 @@ const Signup = () => {
         .then(data => {
             if(data.error){
                 M.toast({html: data.error, displayLength: '1000', classes: '#e53935 red darken-1'});
-                clearAttributes();
             }else{
                 M.toast({html: data.success, displayLength: '1000', classes: '#64dd17 light-green accent-4'});
                 navigate('/signin');
@@ -60,7 +58,7 @@ const Signup = () => {
     return (
         <div className="my-card">
             <div className="card auth-card" style={{margin: "50px auto"}}>
-                <h4 style={{padding: "15px"}}>Project_Management</h4>
+                <h4 style={{padding: "15px"}}>ClassProjex</h4>
                 <select className="browser-default" onChange={(e)=>setmyRole(e.target.value)}>
                     <option value="" >Choose your Role</option>
                     <option value="teacher">Teacher</option>
@@ -68,7 +66,7 @@ const Signup = () => {
                 </select>  
                 <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}/>
                 <input type="email" placeholder="Email" value={email} onChange={(e)=>setEmail((e.target.value).toLowerCase())}/>
-                <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} onKeyUp={handleKeyEnter}/>
                 <button className="btn waves-effect waves-light" onClick={() => postData()}>Register</button>
                 <h5>
                     <Link to="/signin">Have an account?</Link>

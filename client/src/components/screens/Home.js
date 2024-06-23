@@ -10,7 +10,7 @@ const Home = () => {
     const { loginedUser, userDispatch, role, roleDispatch } = useContext(userContext);
 
     useEffect(()=>{
-        role&&fetch(`/${role}myprojects`, {
+        role&&fetch(`http://localhost:8000/${role}myprojects`, {
             method: 'get',
             headers: {
                 'Authorization': 'Bearer '+localStorage.getItem('jwt')
@@ -26,7 +26,7 @@ const Home = () => {
         <div className="container-fluid">
         
         {
-            role=='teacher'?<Modal/>:<></>
+            role==='teacher'?<Modal/>:<></>
         }
 
         <div className="grid-container">                

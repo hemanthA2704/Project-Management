@@ -4,7 +4,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Port = process.env.PORT || 8000;
 const {MongoURI} = require('./config/keys');
+const cors = require('cors')
 
+app.use(cors())
 
 app.use(express.json());
 app.use(require('./routes/teacher'));

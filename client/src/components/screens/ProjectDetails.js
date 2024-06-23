@@ -15,7 +15,7 @@ const ProjectDetails = () => {
     const {id} = useParams();
     let url = '';
     if(role){
-        url = `/${role}/projectdetails/${id}`;        
+        url = `http://localhost:8000/${role}/projectdetails/${id}`;        
     }
 
 
@@ -30,7 +30,7 @@ const ProjectDetails = () => {
         if(!answerFileurl||!answerFilename){
             M.toast({html: "Fill both file name and file url", displayLength: '800', classes: '#e53935 red darken-1'});
         }
-        fetch(`/addanswerfile/${id}`, {
+        fetch(`http://localhost:8000/addanswerfile/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const ProjectDetails = () => {
     }
 
     const deleteAnswerfile = (fileid) => {
-        fetch(`/deleteanswerfile/${id}`, {
+        fetch(`http://localhost:8000/deleteanswerfile/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const ProjectDetails = () => {
         if(!questionFileurl||!questionFilename){
             M.toast({html: "Fill both file name and file url", displayLength: '800', classes: '#e53935 red darken-1'});
         }
-        fetch(`/addquestionfile/${id}`, {
+        fetch(`http://localhost:8000/addquestionfile/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const ProjectDetails = () => {
     }
 
     const deleteQuestionfile = (fileid) => {
-        fetch(`/deletequestionfile/${id}`, {
+        fetch(`http://localhost:8000/deletequestionfile/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ const ProjectDetails = () => {
     }
 
     const makeComment = () => {        
-        fetch(`/${role}comment`, {
+        fetch(`http://localhost:8000/${role}comment`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ const ProjectDetails = () => {
     })
 
     const studentSubmit = () => {
-        fetch(`/submit/${id}`, {
+        fetch(`http://localhost:8000/submit/${id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer '+localStorage.getItem('jwt')
@@ -175,7 +175,7 @@ const ProjectDetails = () => {
     }
 
     const studentUnsubmit = () => {
-        fetch(`/unsubmit/${id}`, {
+        fetch(`http://localhost:8000/unsubmit/${id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer '+localStorage.getItem('jwt')
